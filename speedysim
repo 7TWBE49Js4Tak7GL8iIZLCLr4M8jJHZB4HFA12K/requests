@@ -69,7 +69,7 @@ btns:Toggle("Walk To Orbs, Impossible To Get Banned",false, function(bool)
 
     while walkfarm do wait()
         for i,v in pairs(game:GetService("Workspace").ballsFolder.Zone1:GetDescendants()) do 
-            if v:IsA"Part" and (local player = game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v.Position).magnitude <= 50 then 
+            if v:IsA"Part" and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v.Position).magnitude <= 50 then 
                 game:GetService("Players").LocalPlayer.Character.Humanoid.WalkToPoint = Vector3.new(v.CFrame)
                 print("working?")
             end
@@ -157,14 +157,4 @@ btns:Button("Discord Server", function()
 			})
 		})
 	end
-end)
-
-btns:Seperator()
-
-btns:Button("Owner + Scripter", function()
-    if setclipboard then 
-        setclipboard("sunken#0001")
-    elseif toClipboard then 
-        toClipboard("sunken#0001")
-    end
 end)
