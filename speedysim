@@ -1,0 +1,170 @@
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+
+local win = DiscordLib:Window("Soggy Hub ")
+
+local serv = win:Server("Speedy Simulator | V1", "")
+
+local btns = serv:Channel("Main")
+
+local hum = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+local head = game.Players.LocalPlayer.Character.Head
+
+btns:Seperator()
+
+btns:Toggle("Non-Touching Farmm",false, function(bool)
+    getgenv().autofarm = bool 
+
+    while autofarm do wait()
+        for i,v in pairs(game:GetService("Workspace").ballsFolder.Zone1:GetDescendants()) do 
+            if v.Name == "TouchInterest" and v.Parent then wait()
+                firetouchinterest(head, v.Parent, 0)
+                firetouchinterest(head, v.Parent, 1)
+                if not firetouchinterest then 
+                    for i,v in pairs(game:GetService("Workspace").ballsFolder.Zone1:GetDescendants()) do 
+                        if v.Name == "Base" then 
+                            print("got base")
+                            hum.CFrame = v.CFrame 
+                        end
+                    end
+                end
+            end
+        end
+    end
+end)
+
+btns:Seperator()
+
+btns:Toggle("TP Farm (Fast)",false, function(bool)
+    getgenv().fastfarm = bool 
+
+    while fastfarm do 
+        wait()
+        for i,v in pairs(game:GetService("Workspace").ballsFolder.Zone1:GetDescendants()) do 
+            if v:IsA"Part" then 
+                hum.CFrame = v.CFrame 
+            end
+        end
+    end
+end)
+
+btns:Seperator()
+
+btns:Toggle("Tween Farm (Less Chance Of Ban)",false, function(bool)
+    getgenv().tweenfarm = bool 
+    
+    while tweenfarm do wait(0.1)
+        for i,v in pairs(game:GetService("Workspace").ballsFolder.Zone1:GetDescendants()) do 
+            if v:IsA"Part" then 
+        game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut),{CFrame = v.CFrame}):Play()
+            end
+        end
+    end
+end)    
+
+btns:Seperator()
+
+btns:Toggle("Walk To Orbs, Impossible To Get Banned",false, function(bool)
+    getgenv().walkfarm = bool 
+
+    while walkfarm do wait()
+        for i,v in pairs(game:GetService("Workspace").ballsFolder.Zone1:GetDescendants()) do 
+            if v:IsA"Part" and (local player = game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v.Position).magnitude <= 50 then 
+                game:GetService("Players").LocalPlayer.Character.Humanoid.WalkToPoint = Vector3.new(v.CFrame)
+                print("working?")
+            end
+        end
+    end
+end)
+
+btns:Seperator()
+
+btns:Toggle("Ring Farm",false, function(bool)
+    getgenv().ringfarm = bool 
+    
+    while ringfarm do wait()
+        for i,v in pairs(game:GetService("Workspace").Rings:GetDescendants()) do 
+            if v.Name == "TouchInterest" and v.Parent then 
+                firetouchinterest(head, v.Parent, 0)
+                firetouchinterest(head, v.Parent, 1)
+            end
+        end
+    end
+end)
+
+
+local btns = serv:Channel("Player")
+
+btns:Seperator()
+
+local sldr = btns:Slider("Walkspeed!", 20, 200, 0, function(t)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = t
+end)
+
+btns:Seperator()
+
+local sldr = btns:Slider("JumpPower!", 20, 500, 0, function(t)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = t
+end)
+
+btns:Seperator()
+
+btns:Toggle("GodMode",false, function(bool)
+	if bool then wait()
+    	local Cam = workspace.CurrentCamera
+    	local Pos, Char = Cam.CFrame, speaker.Character
+    	local Human = Char and Char.FindFirstChildWhichIsA(Char, "Humanoid")
+    	local nHuman = Human.Clone(Human)
+    	nHuman.Parent, speaker.Character = Char, nil
+    	nHuman.SetStateEnabled(nHuman, 15, false)
+    	nHuman.SetStateEnabled(nHuman, 1, false)
+    	nHuman.SetStateEnabled(nHuman, 0, false)
+    	nHuman.BreakJointsOnDeath, Human = true, Human.Destroy(Human)
+    	speaker.Character, Cam.CameraSubject, Cam.CFrame = Char, nHuman, wait() and Pos
+    	nHuman.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+    	local Script = Char.FindFirstChild(Char, "Animate")
+    	if Script then
+    		Script.Disabled = true
+    		wait()
+    		Script.Disabled = false
+    	end
+    	nHuman.Health = nHuman.MaxHealth
+	end
+end)
+
+local btns = serv:Channel("Important!")
+
+btns:Button("Discord Server", function()
+    DiscordLib:Notification("Notification", "You will be prompted a discord invite.", "Okay!")
+        	local http = game:GetService('HttpService') 
+	if toClipboard then
+		toClipboard('https://discord.gg/DMTKwpEWnR')
+	else
+	end
+	local req = syn and syn.request or http and http.request or http_request or fluxus and fluxus.request or getgenv().request or request
+	if req then
+		req({
+			Url = 'http://127.0.0.1:6463/rpc?v=1',
+			Method = 'POST',
+			Headers = {
+				['Content-Type'] = 'application/json',
+				Origin = 'https://discord.com'
+			},
+			Body = http:JSONEncode({
+				cmd = 'INVITE_BROWSER',
+				nonce = http:GenerateGUID(false),
+				args = {code = 'GYrTQEryum'}
+			})
+		})
+	end
+end)
+
+btns:Seperator()
+
+btns:Button("Owner + Scripter", function()
+    if setclipboard then 
+        setclipboard("sunken#0001")
+    elseif toClipboard then 
+        toClipboard("sunken#0001")
+    end
+end)
