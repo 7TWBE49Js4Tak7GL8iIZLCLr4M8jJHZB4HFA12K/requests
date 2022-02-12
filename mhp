@@ -1,0 +1,155 @@
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+
+local win = DiscordLib:Window("Soggy Hub ")
+
+local serv = win:Server("Mechnical Haven", "")
+
+local btns = serv:Channel("Main")
+
+local hum = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+btns:Seperator()
+
+btns:Toggle("Crates Farm",false, function(bool)
+    getgenv().autocrates = bool 
+
+    while autocrates do wait()
+        for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do 
+            if v.Name == "Research" then 
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+            end
+        end
+    end
+end)
+
+btns:Seperator()
+
+btns:Toggle("Star Farm",false, function(bool)
+    getgenv().autostar = bool 
+
+    while autostar do wait()
+        for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do 
+            if v.Name == "Star" then 
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+            end
+        end
+    end
+end)
+
+btns:Seperator()
+
+btns:Toggle("Crystal Farm",false, function(bool)
+    getgenv().autocrys = bool 
+
+    while autocrys do wait()
+        for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do 
+            if v.Name == "Crystal" then 
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+            end
+        end
+    end
+end)
+
+btns:Seperator()
+
+btns:Toggle("Diamond Farm",false, function(bool)
+    getgenv().autodia = bool 
+
+    while autodia do wait()
+        for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do 
+            if v.Name == "Diamond" then 
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+            end
+        end
+    end
+end)
+
+btns:Seperator()
+
+btns:Toggle("Golden Farm",false, function(bool)
+    getgenv().autogold = bool 
+
+    while autogold do wait()
+        for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do 
+            if v.Name == "Golden" then 
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+            end
+        end
+    end
+end)
+
+local btns = serv:Channel("Player")
+
+btns:Seperator()
+
+local sldr = btns:Slider("Walkspeed!", 20, 200, 0, function(t)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = t
+end)
+
+btns:Seperator()
+
+local sldr = btns:Slider("JumpPower!", 20, 500, 0, function(t)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = t
+end)
+
+btns:Seperator()
+
+btns:Toggle("GodMode",false, function(bool)
+	if bool then wait()
+    	local Cam = workspace.CurrentCamera
+    	local Pos, Char = Cam.CFrame, speaker.Character
+    	local Human = Char and Char.FindFirstChildWhichIsA(Char, "Humanoid")
+    	local nHuman = Human.Clone(Human)
+    	nHuman.Parent, speaker.Character = Char, nil
+    	nHuman.SetStateEnabled(nHuman, 15, false)
+    	nHuman.SetStateEnabled(nHuman, 1, false)
+    	nHuman.SetStateEnabled(nHuman, 0, false)
+    	nHuman.BreakJointsOnDeath, Human = true, Human.Destroy(Human)
+    	speaker.Character, Cam.CameraSubject, Cam.CFrame = Char, nHuman, wait() and Pos
+    	nHuman.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+    	local Script = Char.FindFirstChild(Char, "Animate")
+    	if Script then
+    		Script.Disabled = true
+    		wait()
+    		Script.Disabled = false
+    	end
+    	nHuman.Health = nHuman.MaxHealth
+	end
+end)
+
+local btns = serv:Channel("Important!")
+
+btns:Button("Discord Server", function()
+    DiscordLib:Notification("Notification", "You will be prompted a discord invite.", "Okay!")
+        	local http = game:GetService('HttpService') 
+	if toClipboard then
+		toClipboard('https://discord.gg/DMTKwpEWnR')
+	else
+	end
+	local req = syn and syn.request or http and http.request or http_request or fluxus and fluxus.request or getgenv().request or request
+	if req then
+		req({
+			Url = 'http://127.0.0.1:6463/rpc?v=1',
+			Method = 'POST',
+			Headers = {
+				['Content-Type'] = 'application/json',
+				Origin = 'https://discord.com'
+			},
+			Body = http:JSONEncode({
+				cmd = 'INVITE_BROWSER',
+				nonce = http:GenerateGUID(false),
+				args = {code = 'GYrTQEryum'}
+			})
+		})
+	end
+end)
+
+btns:Seperator()
+
+btns:Button("Owner + Scripter", function()
+    if setclipboard then 
+        setclipboard("sunken#0001")
+    elseif toClipboard then 
+        toClipboard("sunken#0001")
+    end
+end)
