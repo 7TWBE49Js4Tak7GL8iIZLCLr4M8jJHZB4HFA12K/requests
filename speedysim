@@ -158,3 +158,4 @@ btns:Button("Discord Server", function()
 		})
 	end
 end)
+print("hi")
